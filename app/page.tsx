@@ -1,12 +1,5 @@
-import Button from "antd/es/button";
-import styles from "./page.module.css";
+import HomePage from '@/modules/HomePage';
 
 export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Button type="primary">Button</Button>
-      </main>
-    </div>
-  );
+  return <HomePage />;
 }

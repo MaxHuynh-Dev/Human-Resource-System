@@ -4,8 +4,5 @@
   "singleQuote": true,
   "printWidth": 100,
   "tabWidth": 2,
-  "endOfLine": "auto",
-  "plugins": ["prettier-plugin-tailwindcss"],
-  "tailwindAttributes": ["myClassList", "/data-.*/"],
-  "tailwindFunctions": ["clsx"]
+  "endOfLine": "auto"
 }
