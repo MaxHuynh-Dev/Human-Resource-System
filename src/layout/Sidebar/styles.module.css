@@ -1,32 +1,8 @@
 :global(.ant-menu-item-group-title) {
   padding: 16px 16px 8px 16px !important;
-  color: #21252b;
-  font-size: 14px;
-  font-style: normal;
   font-weight: 700;
-  line-height: 150%; /* 21px */
-  letter-spacing: 0.07px;
-  text-transform: uppercase;
 }
 
-/* Menu item styling */
-:global(.ant-menu-item) {
-  color: #6b7280;
-  font-size: 14px;
-  font-weight: 500;
-  margin: 4px 8px !important;
-  border-radius: 8px !important;
-  height: 44px;
-  display: flex;
-  align-items: center;
-}
-
-/* Menu item icon styling */
-:global(.ant-menu-item .anticon) {
-  font-size: 18px;
-}
-
-/* Selected menu item - green background for Dashboard */
 :global(.ant-menu-item-selected) {
   background-color: #d1fae5 !important;
   color: #059669 !important;
@@ -36,18 +12,15 @@
   color: #059669 !important;
 }
 
-/* Hover state */
 :global(.ant-menu-item:hover:not(.ant-menu-item-selected)) {
   background-color: #f3f4f6 !important;
   color: #374151;
 }
 
-/* Remove default Ant Design active border */
 :global(.ant-menu-item::after) {
   border-right: none !important;
 }
 
-/* Adjust menu item group list padding */
 :global(.ant-menu-item-group-list) {
   padding-bottom: 8px;
 }

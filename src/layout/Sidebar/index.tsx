@@ -5,17 +5,19 @@ import {
   ApartmentOutlined,
   AppstoreOutlined,
   BarChartOutlined,
-  CalendarFilled,
   CalendarOutlined,
   CheckSquareOutlined,
+  CoffeeOutlined,
   DollarOutlined,
+  DoubleLeftOutlined,
+  DoubleRightOutlined,
   FileTextOutlined,
   FormOutlined,
   UserOutlined,
 } from '@ant-design/icons';
-import { Image, Menu, MenuProps } from 'antd';
+import { Button, Flex, Image, Menu, MenuProps } from 'antd';
 import Sider from 'antd/es/layout/Sider';
-import React from 'react';
+import React, { Activity } from 'react';
 import './styles.module.css';
 
 const siderStyle: React.CSSProperties = {
@@ -84,29 +86,61 @@ const items: MenuItem[] = [
       getItem('Nhân viên', 'employees', <UserOutlined />),
       getItem('Request', 'request', <FormOutlined />),
       getItem('Báo cáo', 'reports', <BarChartOutlined />),
-      getItem('Kế hoạch sự kiện', 'events', <CalendarFilled />),
+      getItem('Kế hoạch sự kiện', 'events', <CoffeeOutlined />),
     ],
     'group'
   ),
 ];
 
 function Sidebar(): React.JSX.Element {
-  const { collapsed } = useSidebarStore();
+  const { collapsed, setCollapsed } = useSidebarStore();
 
   return (
-    <Sider trigger={null} collapsible collapsed={collapsed} style={siderStyle} width={280}>
-      <div className="demo-logo-vertical">
-        <Image src="/images/logo/logo.png" alt="logo" />
-      </div>
+    <Sider
+      trigger={null}
+      collapsible
+      collapsed={collapsed}
+      style={siderStyle}
+      width={280}
+      theme="light"
+    >
+      <Flex
+        align="center"
+        justify={collapsed ? 'center' : 'space-between'}
+        style={{ paddingInline: 16 }}
+      >
+        <div
+          style={{
+            flexShrink: 0,
+          }}
+        >
+          <Activity name="logo" mode={!collapsed ? 'visible' : 'hidden'}>
+            <Image src="/images/logo/logo.png" alt="logo" height={28} width={'auto'} />
+          </Activity>
+        </div>
+
+        <Button
+          type="text"
+          icon={collapsed ? <DoubleRightOutlined /> : <DoubleLeftOutlined />}
+          onClick={() => {
+            setCollapsed(!collapsed);
+          }}
+          style={{
+            borderRadius: '50%',
+            fontSize: 14,
+            width: 24,
+            backgroundColor: '#FAFAFA',
+            height: 24,
+          }}
+        />
+      </Flex>
 
       <Menu
         mode="inline"
         defaultSelectedKeys={['dashboard']}
-        // style={{
-        //   height: '100%',
-        //   borderRight: 0,
-        //   fontWeight: 500,
-        // }}
+        style={{
+          marginTop: 24,
+        }}
         items={items}
       />
     </Sider>
