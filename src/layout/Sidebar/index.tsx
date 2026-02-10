@@ -15,16 +15,17 @@ import {
   FormOutlined,
   UserOutlined,
 } from '@ant-design/icons';
-import { Button, Flex, Image, Menu, MenuProps } from 'antd';
+import { Button, Flex, Menu, MenuProps } from 'antd';
 import Sider from 'antd/es/layout/Sider';
+import Image from 'next/image';
+import Link from 'next/link';
 import React, { Activity } from 'react';
 import './styles.module.css';
-
 const siderStyle: React.CSSProperties = {
   overflow: 'auto',
   height: '100vh',
   position: 'sticky',
-  // insetInlineStart: 0,
+  insetInlineStart: 0,
   // minWidth: '280px !important',
   // maxWidth: 'auto !important',
   // width: 'max-content !important',
@@ -35,20 +36,23 @@ const siderStyle: React.CSSProperties = {
   paddingBlock: '32px',
 };
 
-type MenuItem = Required<MenuProps>['items'][number];
+type MenuItem = Required<MenuProps>['items'][number] & {
+  href?: string;
+};
 
 function getItem(
   label: React.ReactNode,
   key: React.Key,
   icon?: React.ReactNode,
   children?: MenuItem[],
-  type?: 'group'
+  type?: 'group',
+  href?: string
 ): MenuItem {
   return {
     key,
     icon,
     children,
-    label,
+    label: href ? <Link href={href}>{label}</Link> : label,
     type,
   } as MenuItem;
 }
@@ -59,10 +63,24 @@ const items: MenuItem[] = [
     'group-personal',
     null,
     [
-      getItem('Dashboard', 'dashboard', <AppstoreOutlined />),
-      getItem('Lịch cá nhân', 'personal-calendar', <CalendarOutlined />),
-      getItem('To do list', 'todo-list', <CheckSquareOutlined />),
-      getItem('Tài liệu', 'documents', <FileTextOutlined />),
+      getItem('Dashboard', 'dashboard', <AppstoreOutlined />, undefined, undefined, '/dashboard'),
+      getItem(
+        'Lịch cá nhân',
+        'personal-calendar',
+        <CalendarOutlined />,
+        undefined,
+        undefined,
+        '/personal-calendar'
+      ),
+      getItem(
+        'To do list',
+        'todo-list',
+        <CheckSquareOutlined />,
+        undefined,
+        undefined,
+        '/todo-list'
+      ),
+      getItem('Tài liệu', 'documents', <FileTextOutlined />, undefined, undefined, '/documents'),
     ],
     'group'
   ),
@@ -72,8 +90,8 @@ const items: MenuItem[] = [
     'group-recruitment',
     null,
     [
-      getItem('Job', 'job', <DollarOutlined />),
-      getItem('Quy trình', 'process', <ApartmentOutlined />),
+      getItem('Job', 'job', <DollarOutlined />, undefined, undefined, '/job'),
+      getItem('Quy trình', 'process', <ApartmentOutlined />, undefined, undefined, '/process'),
     ],
     'group'
   ),
@@ -83,10 +101,10 @@ const items: MenuItem[] = [
     'group-organization',
     null,
     [
-      getItem('Nhân viên', 'employees', <UserOutlined />),
-      getItem('Request', 'request', <FormOutlined />),
-      getItem('Báo cáo', 'reports', <BarChartOutlined />),
-      getItem('Kế hoạch sự kiện', 'events', <CoffeeOutlined />),
+      getItem('Nhân viên', 'employees', <UserOutlined />, undefined, undefined, '/employees'),
+      getItem('Request', 'request', <FormOutlined />, undefined, undefined, '/request'),
+      getItem('Báo cáo', 'reports', <BarChartOutlined />, undefined, undefined, '/reports'),
+      getItem('Kế hoạch sự kiện', 'events', <CoffeeOutlined />, undefined, undefined, '/events'),
     ],
     'group'
   ),
@@ -109,15 +127,15 @@ function Sidebar(): React.JSX.Element {
         justify={collapsed ? 'center' : 'space-between'}
         style={{ paddingInline: 16 }}
       >
-        <div
-          style={{
-            flexShrink: 0,
-          }}
-        >
-          <Activity name="logo" mode={!collapsed ? 'visible' : 'hidden'}>
-            <Image src="/images/logo/logo.png" alt="logo" height={28} width={'auto'} />
-          </Activity>
-        </div>
+        <Activity name="logo" mode={!collapsed ? 'visible' : 'hidden'}>
+          <Image
+            src="/images/logo/logo.png"
+            alt="logo"
+            height={26}
+            width={146}
+            style={{ flexShrink: 0 }}
+          />
+        </Activity>
 
         <Button
           type="text"
