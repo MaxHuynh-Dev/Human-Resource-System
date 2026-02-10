@@ -10,7 +10,7 @@ export default function WithSidebar({
   children: React.ReactNode;
 }): React.ReactElement {
   return (
-    <Layout>
+    <Layout hasSider>
       <Sidebar />
       <Layout>
         <Header />
